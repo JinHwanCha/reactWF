@@ -1,0 +1,226 @@
+/* ===========================
+   People Page Styles (people.html)
+   ?�플 ?�이지 ?�용 ?��???
+   =========================== */
+
+/* ===========================
+   Page Header
+   =========================== */
+.header-content {
+    transition: opacity 0.3s ease;
+}
+
+/* ===========================
+   Culture Section
+   =========================== */
+.culture-section {
+    padding: 80px 0;
+}
+
+.culture-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    transition: opacity 0.3s ease;
+}
+
+.culture-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+}
+
+.culture-text p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.culture-values {
+    display: grid;
+    gap: 30px;
+}
+
+.value-item {
+    padding: 25px;
+    background: var(--light-gray);
+    border-radius: 10px;
+}
+
+.value-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+/* ===========================
+   Leadership Section
+   =========================== */
+.leadership-section {
+    background: var(--light-gray);
+    padding: 80px 0;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.team-member {
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.member-photo {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #3a7bd5 0%, #2c5aa0 100%);
+    border-radius: 50%;
+    overflow: hidden;
+}
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Witness Theme */
+body.witness-theme .member-photo {
+    background: linear-gradient(135deg, #00d4c8 0%, #00b8a9 100%);
+}
+
+.member-role {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.member-bio {
+    color: var(--dark-gray);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ===========================
+   Departments Section
+   =========================== */
+.departments-section {
+    padding: 80px 0;
+}
+
+.departments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.department-card {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.department-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dept-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    color: var(--accent-color);
+}
+
+.department-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.team-count {
+    display: block;
+    margin-top: 15px;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+/* ===========================
+   Careers Section
+   =========================== */
+.careers-section {
+    background: linear-gradient(135deg, #3a7bd5 0%, #2c5aa0 100%);
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+/* Witness Theme */
+body.witness-theme .careers-section {
+    background: linear-gradient(135deg, #00d4c8 0%, #00b8a9 100%);
+}
+
+.careers-text {
+    transition: opacity 0.3s ease;
+}
+
+.careers-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.careers-content > p,
+.careers-text > p {
+    font-size: 1.2rem;
+    margin-bottom: 60px;
+    opacity: 0.9;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.benefit-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.benefit-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.benefit-item p {
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 968px) {
+    .culture-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .team-grid,
+    .departments-grid {
+        grid-template-columns: 1fr;
+    }
+}

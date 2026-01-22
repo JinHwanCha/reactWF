@@ -1,0 +1,380 @@
+/* ===========================
+   Home Page Styles (index.html)
+   메인 페이지 전용 스타일
+   =========================== */
+
+/* ===========================
+   Hero Section
+   =========================== */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #3a7bd5 0%, #2c5aa0 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Witness Theme Hero */
+body.witness-theme .hero {
+    background: linear-gradient(135deg, #00d4c8 0%, #00b8a9 100%);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(0,0,0,0.1)"/></svg>') no-repeat bottom;
+    background-size: cover;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 30px;
+}
+
+.hero-title .line {
+    display: block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.hero-title .line:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.hero-title .line:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.hero-title .line:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    animation: fadeInUp 0.8s ease 0.8s forwards;
+    opacity: 0;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    opacity: 0.8;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+.scroll-line {
+    width: 1px;
+    height: 30px;
+    background: white;
+}
+
+/* ===========================
+   CEO Message Section
+   =========================== */
+.ceo-message {
+    background: var(--light-gray);
+}
+
+.ceo-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.ceo-text p {
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+
+.large-text {
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+blockquote {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+    padding: 30px 0;
+    margin: 30px 0;
+    border-left: 4px solid var(--accent-color);
+    padding-left: 30px;
+}
+
+.ceo-signature {
+    margin-top: 40px;
+}
+
+.ceo-image .image-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #3a7bd5 0%, #2c5aa0 100%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.ceo-image .image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Witness Theme */
+body.witness-theme .ceo-image .image-placeholder {
+    background: linear-gradient(135deg, #00d4c8 0%, #00b8a9 100%);
+}
+
+body.witness-theme .work-image {
+    background: linear-gradient(135deg, #00d4c8 0%, #00b8a9 100%);
+}
+
+/* ===========================
+   Company Info Section
+   =========================== */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.info-card {
+    text-align: center;
+    padding: 40px 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.info-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    color: var(--accent-color);
+}
+
+.info-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.big-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 10px 0;
+}
+
+/* ===========================
+   Business Areas Section
+   =========================== */
+.business-areas {
+    background: var(--light-gray);
+}
+
+.business-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.business-card {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.business-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: var(--accent-color);
+    transition: height 0.3s ease;
+}
+
+.business-card:hover::before {
+    height: 100%;
+}
+
+.business-card:hover {
+    transform: translateX(10px);
+}
+
+.business-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(102, 126, 234, 0.1);
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.scroll-reveal.active .business-number {
+    color: var(--accent-color);
+}
+
+.business-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+/* ===========================
+   Featured Work Section
+   =========================== */
+.featured-work {
+    background: white;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.work-item {
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.work-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.work-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #3a7bd5 0%, #2c5aa0 100%);
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0;
+}
+
+.work-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.work-info {
+    padding: 20px;
+}
+
+.work-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.work-info p {
+    color: var(--dark-gray);
+}
+
+/* ===========================
+   Contact Section
+   =========================== */
+.contact {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+}
+
+/* Witness Theme */
+body.witness-theme .contact {
+    background: linear-gradient(135deg, #00d4c8 0%, #00b8a9 100%);
+}
+
+.contact-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.contact-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 968px) {
+    .ceo-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .business-grid,
+    .work-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}

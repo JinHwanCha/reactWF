@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소식 - NaesooWF</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/news.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/" class="logo-text">FISHERMEN</a>
+            </div>
+            <div class="group-toggle">
+                <span class="toggle-label witness-label">Witness</span>
+                <div class="toggle-switch" id="groupToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="toggle-label fishermen-label">Fishermen</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/work/">사역</a></li>
+                <li><a href="/news/" class="active">소식</a></li>
+                <li><a href="/people/">청년부원</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>News & Insights</h1>
+            <p>하나님의 은혜와 청년부의 생생한 이야기를 나눕니다</p>
+        </div>
+    </section>
+
+    <!-- Featured News -->
+    <section class="featured-news">
+        <div class="container">
+            <!-- Witness Featured -->
+            <div class="featured-article" data-group="witness">
+                <div class="featured-image"></div>
+                <div class="featured-content">
+                    <span class="news-category">최신 소식</span>
+                    <h2>2026년 1학기 대학부 일정 안내</h2>
+                    <p class="news-date">2026.01.15</p>
+                    <p class="news-excerpt">
+                        새 학기를 맞아 Witness 대학부의 주요 일정과 활동 계획을 안내드립니다. 
+                        매주 예배, 소그룹 모임, 특별 집회 및 수련회 일정이 포함되어 있으며, 
+                        캠퍼스 전도와 선교 활동도 계획되어 있습니다. 함께 성장하는 한 학기가 되기를...
+                    </p>
+                    <a href="#" class="read-more">더 보기 →</a>
+                </div>
+            </div>
+            
+            <!-- Fishermen Featured -->
+            <div class="featured-article" data-group="fishermen">
+                <div class="featured-image"></div>
+                <div class="featured-content">
+                    <span class="news-category">최신 소식</span>
+                    <h2>2026년 청년부 비전 선포식</h2>
+                    <p class="news-date">2026.01.18</p>
+                    <p class="news-excerpt">
+                        새해를 맞아 Fishermen 청년부의 비전과 목표를 선포하는 뜻깊은 시간을 가졌습니다. 
+                        '사람을 낚는 어부'라는 청년부의 정체성을 재확인하며, 직장과 삶의 현장에서 
+                        빛과 소금의 역할을 감당하겠다는 다짐을 나누었습니다...
+                    </p>
+                    <a href="#" class="read-more">더 보기 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="news-grid-section">
+        <div class="container">
+            <div class="news-filter">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="announcement">공지</button>
+                <button class="filter-btn" data-filter="event">행사</button>
+                <button class="filter-btn" data-filter="testimony">간증</button>
+                <button class="filter-btn" data-filter="mission">선교</button>
+            </div>
+
+            <div class="news-grid">
+                <!-- News cards will be dynamically rendered by news.js -->
+            </div>
+
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Detail Modal -->
+    <div class="news-modal" id="newsModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <span class="modal-category" id="modalCategory">공지</span>
+                <h2 class="modal-title" id="modalTitle">소식 제목</h2>
+                <p class="modal-date" id="modalDate">2026.01.15</p>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription">소식 내용이 여기에 표시됩니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>뉴스레터 구독</h2>
+                <p>최신 소식과 인사이트를 이메일로 받아보세요</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="이메일 주소를 입력하세요" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Fishermen</h4>
+                    <p>내수동교회 청년부 - 사람을 낚는 어부가 되리라</p>
+                </div>
+                <div class="footer-col">
+                    <h4>바로가기</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/work/">사역</a></li>
+                        <li><a href="/news/">소식</a></li>
+                        <li><a href="/people/">청년부원</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>연락처</h4>
+                    <ul>
+                        <li>Email: fishermen@naesoodong.com</li>
+                        <li>Tel: 02-737-6351</li>
+                        <li>서울 중구 내수동</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">YouTube</a>
+                        <a href="#">KakaoTalk</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fishermen 내수동교회 청년부. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Common JavaScript for all pages -->
+    <script src="../js/common.js"></script>
+    <!-- Data loader utility -->
+    <script src="../js/data-loader.js"></script>
+    <!-- News page specific JavaScript -->
+    <script src="../js/news.js"></script>
+</body>
+</html>
