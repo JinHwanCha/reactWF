@@ -67,7 +67,7 @@ function News() {
                 )}
               </div>
               <div className="featured-content">
-                <span className="featured-category">{categoryNames[featuredNews.category]}</span>
+                <span className="news-category">최신 소식</span>
                 <h2>{featuredNews.title}</h2>
                 <p className="news-date">
                   {featuredNews.date || new Date(featuredNews.createdAt).toLocaleDateString('ko-KR')}
@@ -126,7 +126,7 @@ function News() {
           </div>
 
           <div className="news-grid">
-            {filteredData.slice(1).map((item) => (
+            {filteredData.map((item) => (
               <div
                 key={item.id}
                 className="news-card"
@@ -139,13 +139,11 @@ function News() {
                   )}
                 </div>
                 <div className="news-content">
-                  <span className="news-category">{categoryNames[item.category]}</span>
+                  <span className="news-tag">{categoryNames[item.category]}</span>
                   <h3>{item.title}</h3>
+                  <p className="news-date">{item.date || new Date(item.createdAt).toLocaleDateString('ko-KR')}</p>
                   <p className="news-excerpt">{item.excerpt || item.content?.substring(0, 100)}...</p>
                   <div className="news-meta">
-                    <span className="news-date">
-                      {item.date || new Date(item.createdAt).toLocaleDateString('ko-KR')}
-                    </span>
                     <a
                       href="#"
                       className="read-more"
