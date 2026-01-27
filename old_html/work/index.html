@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사역 - NaesooWF</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/work.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/" class="logo-text">FISHERMEN</a>
+            </div>
+            <div class="group-toggle">
+                <span class="toggle-label witness-label">Witness</span>
+                <div class="toggle-switch" id="groupToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="toggle-label fishermen-label">Fishermen</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/work/" class="active">사역</a></li>
+                <li><a href="/news/">소식</a></li>
+                <li><a href="/people/">청년부원</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>사역 활동</h1>
+            <p class="page-subtitle">함께 만들어가는 신앙 공동체의 발자취</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="work-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="worship">예배</button>
+                <button class="filter-btn" data-filter="event">행사</button>
+                <button class="filter-btn" data-filter="mission">선교</button>
+                <button class="filter-btn" data-filter="service">봉사</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Gallery -->
+    <section class="work-gallery">
+        <div class="container">
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be dynamically rendered by work.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="awards-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Awards & Recognition</h2>
+            </div>
+            <div class="awards-grid">
+                <div class="award-item">
+                    <h3>2025</h3>
+                    <p>Director Commissioning</p>
+                </div>
+                <div class="award-item">
+                    <h3>2025</h3>
+                    <p>Community Leaders</p>
+                </div>
+                <div class="award-item">
+                    <h3>2025</h3>
+                    <p>Leaders Installed</p>
+                </div>
+                <div class="award-item">
+                    <h3>2025</h3>
+                    <p>Outstanding Cell Member</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <span class="modal-category" id="modalCategory">예배</span>
+                <h2 class="modal-title" id="modalTitle">프로젝트 제목</h2>
+                <p class="modal-date" id="modalDate">2024년 1월</p>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription">프로젝트 설명이 여기에 표시됩니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Fishermen</h4>
+                    <p>내수동교회 청년부 - 사람을 낚는 어부가 되리라</p>
+                </div>
+                <div class="footer-col">
+                    <h4>바로가기</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/work/">사역</a></li>
+                        <li><a href="/news/">소식</a></li>
+                        <li><a href="/people/">청년부원</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>연락처</h4>
+                    <ul>
+                        <li>Email: fishermen@naesoodong.com</li>
+                        <li>Tel: 02-737-6351</li>
+                        <li>서울 종로구 경희궁2길 5-6 내수동교회</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">YouTube</a>
+                        <a href="#">KakaoTalk</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fishermen 내수동교회 청년부. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Common JavaScript for all pages -->
+    <script src="../js/common.js"></script>
+    <!-- Data loader utility -->
+    <script src="../js/data-loader.js"></script>
+    <!-- Work page specific JavaScript -->
+    <script src="../js/work.js"></script>
+</body>
+</html>

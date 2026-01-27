@@ -1,0 +1,43 @@
+# React Router를 위한 Rewrite 설정
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # API 요청은 그대로 통과
+  RewriteRule ^api/ - [L]
+
+  # data 폴더 요청도 그대로 통과
+  RewriteRule ^data/ - [L]
+
+  # images 폴더 요청도 그대로 통과
+  RewriteRule ^images/ - [L]
+
+  # 실제 파일이나 디렉토리가 존재하면 그대로 서빙
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # 나머지는 모두 index.html로 라우팅 (React Router)
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# PHP 설정
+<IfModule mod_php.c>
+  php_flag display_errors Off
+  php_value upload_max_filesize 10M
+  php_value post_max_size 10M
+</IfModule>
+
+# MIME types
+AddType application/json .json
+
+# 보안 설정
+<FilesMatch "\.(json|log|md)$">
+  Order allow,deny
+  Allow from all
+</FilesMatch>
+
+# .env 파일 보호
+<FilesMatch "^\.env">
+  Order allow,deny
+  Deny from all
+</FilesMatch>

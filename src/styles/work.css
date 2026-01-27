@@ -1,0 +1,235 @@
+/* ===========================
+   Work Page Styles (work.html)
+   작품 페이지 전용 스타일
+   =========================== */
+
+/* ===========================
+   Work Filter Section
+   =========================== */
+.work-filter {
+    padding: 40px 0;
+    background: var(--light-gray);
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* ===========================
+   Work Gallery Section
+   =========================== */
+.work-gallery {
+    padding: 80px 0;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.gallery-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #3a7bd5 0%, #2c5aa0 100%);
+    transition: var(--transition);
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Witness Theme */
+body.witness-theme .gallery-image {
+    background: linear-gradient(135deg, #00d4c8 0%, #00b8a9 100%);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+}
+
+.gallery-content {
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.category {
+    display: inline-block;
+    padding: 5px 15px;
+    background: var(--accent-color);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.gallery-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.view-project {
+    display: inline-block;
+    margin-top: 15px;
+    color: white;
+    font-weight: 600;
+}
+
+/* ===========================
+   Awards Section
+   =========================== */
+.awards-section {
+    background: var(--light-gray);
+    padding: 80px 0;
+}
+
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.award-item {
+    background: white;
+    padding: 40px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.award-item h3 {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+/* ===========================
+   Project Modal
+   =========================== */
+.project-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-modal.show {
+    opacity: 1;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.project-modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--dark-gray);
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: var(--light-gray);
+    color: var(--primary-color);
+}
+
+.modal-header {
+    margin-bottom: 25px;
+}
+
+.modal-category {
+    display: inline-block;
+    padding: 5px 15px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.modal-date {
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+}
+
+.modal-body {
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 968px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
