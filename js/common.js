@@ -649,7 +649,14 @@ function initModal(config) {
         const title = parent.querySelector(titleSelector)?.textContent || '';
         const category = categorySelector ? parent.querySelector(categorySelector)?.textContent || '' : '';
         const date = dateSelector ? parent.querySelector(dateSelector)?.textContent || '' : '';
-        const description = parent.getAttribute(descriptionAttr) || '';
+        let description = '';
+        if (descriptionAttr) {
+            description = parent.getAttribute(descriptionAttr) || '';
+        } else {
+            // descriptionAttr이 비어있으면 .news-excerpt의 텍스트를 사용
+            const excerpt = parent.querySelector('.news-excerpt');
+            description = excerpt ? excerpt.textContent.trim() : '';
+        }
 
         if (modalTitle) modalTitle.textContent = title;
         if (modalCategory && category) modalCategory.textContent = category;

@@ -94,6 +94,39 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (jsonData && jsonData.length > 0) {
             peopleData = jsonData;
             renderPeopleGrid();
+            
+            // 렌더링 후 현재 그룹에 맞게 필터링
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentGroup = urlParams.get('group') || 'fishermen';
+            filterTeamMembersByGroup(currentGroup);
         }
     }
+});
+
+// ===========================
+// Filter Team Members by Group
+// ===========================
+function filterTeamMembersByGroup(group) {
+    const teamMembers = document.querySelectorAll('.team-member[data-group]');
+    teamMembers.forEach(member => {
+        const memberGroup = member.getAttribute('data-group');
+        if (memberGroup === group) {
+            member.style.display = 'block';
+            setTimeout(() => {
+                member.style.opacity = '1';
+                member.style.transform = 'translateY(0)';
+            }, 50);
+        } else {
+            member.style.opacity = '0';
+            member.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                member.style.display = 'none';
+            }, 300);
+        }
+    });
+}
+
+// Listen for group changes from common.js
+document.addEventListener('groupChanged', (e) => {
+    filterTeamMembersByGroup(e.detail.group);
 });

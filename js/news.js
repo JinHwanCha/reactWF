@@ -202,77 +202,36 @@ function renderNewsCards() {
         </article>
     `).join('');
     
-    // Attach click events to "더 보기" buttons
-    attachReadMoreEvents();
+    // Attach click events to "더 보기" buttons (공통 모달 시스템 적용)
+    if (window.initModal) {
+        // 일반 뉴스 카드용
+        initModal({
+            modalId: 'newsModal',
+            triggerSelector: '.news-card .read-more',
+            parentSelector: '.news-card',
+            titleSelector: 'h3',
+            categorySelector: '.news-tag',
+            dateSelector: '.news-date',
+            descriptionAttr: 'data-description'
+        });
+        // Featured News(최신 소식)용
+        initModal({
+            modalId: 'newsModal',
+            triggerSelector: '.featured-article .read-more',
+            parentSelector: '.featured-article',
+            titleSelector: 'h2',
+            categorySelector: '.news-category',
+            dateSelector: '.news-date',
+            descriptionAttr: '' // featured는 data-description이 아니라 p.excerpt 등에서 가져옴
+        });
+    }
     
     // Re-initialize filters
     initializeFilterButtons();
     showPage();
 }
 
-// ===========================
-// Modal Functions
-// ===========================
-function attachReadMoreEvents() {
-    const readMoreButtons = document.querySelectorAll('.read-more');
-    const modal = document.getElementById('newsModal');
-    const closeModal = document.querySelector('.close-modal');
-    
-    if (!modal) return;
-    
-    const modalTitle = document.getElementById('modalTitle');
-    const modalCategory = document.getElementById('modalCategory');
-    const modalDate = document.getElementById('modalDate');
-    const modalDescription = document.getElementById('modalDescription');
-    
-    // 카테고리 이름 매핑
-    const categoryNames = {
-        announcement: '공지',
-        event: '행사',
-        testimony: '간증',
-        mission: '선교',
-        notice: '공지'
-    };
-    
-    readMoreButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const index = parseInt(button.getAttribute('data-index'));
-            const item = newsData[index];
-            
-            if (item) {
-                modalTitle.textContent = item.title;
-                modalCategory.textContent = categoryNames[item.category] || item.category;
-                modalDate.textContent = item.date || new Date(item.createdAt).toLocaleDateString('ko-KR');
-                modalDescription.textContent = item.description || item.content || '';
-                
-                modal.style.display = 'flex';
-                setTimeout(() => {
-                    modal.classList.add('active');
-                }, 10);
-            }
-        });
-    });
-    
-    // Close modal events
-    if (closeModal) {
-        closeModal.onclick = () => {
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        };
-    }
-    
-    window.onclick = (event) => {
-        if (event.target === modal) {
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-    };
-}
+// ...existing code...
 
 // ===========================
 // Pagination and Filter
@@ -408,6 +367,60 @@ document.addEventListener('DOMContentLoaded', async () => {
             newsData = jsonData;
         }
     }
-    
+
+
+
+    // 그룹별 최신글 1개만 노출하는 함수
+    function getLatestByGroup(group) {
+        return [...newsData]
+            .filter(item => item.group === group)
+            .sort((a, b) => {
+                const parseDate = d => new Date((d.date || d.createdAt || '').replace(/\./g, '-'));
+                return parseDate(b) - parseDate(a);
+            })[0];
+    }
+
+    function renderFeaturedNews(group) {
+        const latest = getLatestByGroup(group);
+        let html = '';
+        if (latest) {
+            html = `
+            <div class="featured-article" data-group="${group}">
+                <div class="featured-image"></div>
+                <div class="featured-content">
+                    <span class="news-category">최신 소식</span>
+                    <h2>${latest.title}</h2>
+                    <p class="news-date">${latest.date || ''}</p>
+                    <p class="news-excerpt">${latest.excerpt || latest.description || ''}</p>
+                    <a href="#" class="read-more">더 보기 →</a>
+                </div>
+            </div>
+            `;
+        }
+        const featuredContainer = document.getElementById('featuredNewsContainer');
+        if (featuredContainer) featuredContainer.innerHTML = html;
+        // 최신 소식 더보기 버튼에 모달 이벤트 재바인딩
+        if (window.initModal) {
+            initModal({
+                modalId: 'newsModal',
+                triggerSelector: '.featured-article .read-more',
+                parentSelector: '.featured-article',
+                titleSelector: 'h2',
+                categorySelector: '.news-category',
+                dateSelector: '.news-date',
+                descriptionAttr: ''
+            });
+        }
+    }
+
+    // Fishermen이 기본
+    renderFeaturedNews('fishermen');
+
+    // 그룹 토글 시 최신글 변경
+    document.addEventListener('groupChanged', (e) => {
+        const group = e.detail.group;
+        renderFeaturedNews(group);
+    });
+
     renderNewsCards();
 });

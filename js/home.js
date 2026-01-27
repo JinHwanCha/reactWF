@@ -22,7 +22,6 @@ if (hero) {
 // ===========================
 // Counter Animation
 // ===========================
-const counters = document.querySelectorAll('.big-number');
 const counterSpeed = 200;
 
 const countUp = (counter) => {
@@ -43,7 +42,18 @@ const countUp = (counter) => {
     updateCount();
 };
 
-// Observe counters
+// Function to trigger counter animation
+function triggerCounterAnimation() {
+    const counters = document.querySelectorAll('.big-number');
+    counters.forEach(counter => {
+        if (counter.classList.contains('counted')) {
+            countUp(counter);
+        }
+    });
+}
+
+// Observe counters on scroll
+const counters = document.querySelectorAll('.big-number');
 if (counters.length > 0) {
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -211,4 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // Listen for group change events from common.js toggle
 document.addEventListener('groupChanged', (e) => {
     renderRecentWork();
+    
+    // Trigger counter animation when toggle is clicked
+    // Add delay to allow DOM update first
+    setTimeout(() => {
+        triggerCounterAnimation();
+    }, 50);
 });

@@ -188,11 +188,6 @@ document.getElementById('workForm').addEventListener('submit', async (e) => {
     // editId 제거
     delete data.editId;
     
-    if (!data.image) {
-        showAlert('work', '이미지를 업로드해주세요!', 'error');
-        return;
-    }
-    
     showLoading();
     
     try {
@@ -251,11 +246,12 @@ async function loadWorkData() {
         
         listDiv.innerHTML = data.map(item => `
             <div class="item-card">
-                <img src="/${item.image}" alt="${item.title}" onerror="this.src='/images/placeholder.jpg'">
+                ${item.image ? `<img src="/${item.image}" alt="${item.title}" onerror="this.style.display='none'">` : ''}
                 <h3>${item.title}</h3>
                 <p>${item.description || ''}</p>
                 ${item.category ? `<span class="meta">카테고리: ${categoryNames[item.category] || item.category}</span><br>` : ''}
                 ${item.date ? `<span class="meta">날짜: ${item.date}</span><br>` : ''}
+                ${item.group ? `<span class="meta">그룹: ${item.group === 'witness' ? 'Witness' : 'Fishermen'}</span><br>` : ''}
                 <div class="meta">${new Date(item.createdAt).toLocaleDateString('ko-KR')}</div>
                 <div class="item-actions">
                     <button class="btn-edit" onclick="editWork(${item.id})">수정</button>
@@ -483,11 +479,6 @@ document.getElementById('peopleForm').addEventListener('submit', async (e) => {
     // editId 제거
     delete data.editId;
     
-    if (!data.image) {
-        showAlert('people', '프로필 이미지를 업로드해주세요!', 'error');
-        return;
-    }
-    
     showLoading();
     
     try {
@@ -538,9 +529,10 @@ async function loadPeopleData() {
         
         listDiv.innerHTML = data.map(item => `
             <div class="item-card">
-                <img src="/${item.image}" alt="${item.name}" onerror="this.src='/images/placeholder.jpg'">
+                ${item.image ? `<img src="/${item.image}" alt="${item.name}" onerror="this.style.display='none'">` : ''}
                 <h3>${item.name}</h3>
                 ${item.position ? `<p><strong>${item.position}</strong></p>` : ''}
+                ${item.group ? `<p class="meta">그룹: ${item.group === 'witness' ? 'Witness' : 'Fishermen'}</p>` : ''}
                 <p>${item.bio || ''}</p>
                 <div class="meta">${new Date(item.createdAt).toLocaleDateString('ko-KR')}</div>
                 <div class="item-actions">
