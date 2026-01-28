@@ -312,7 +312,8 @@ function editNews(id) {
                 // 폼에 데이터 채우기
                 const form = document.getElementById('newsForm');
                 form.querySelector('[name="title"]').value = item.title || '';
-                form.querySelector('[name="content"]').value = item.content || '';
+                form.querySelector('[name="content"]').value = item.description || item.content || '';
+                form.querySelector('[name="category"]').value = item.category || '';
                 form.querySelector('[name="date"]').value = item.date || '';
                 form.querySelector('[name="group"]').value = item.group || 'fishermen';
                 document.getElementById('newsImagePath').value = item.image || '';
@@ -382,20 +383,32 @@ async function loadNewsData() {
     try {
         const response = await fetch('/api/news.php');
         const data = await response.json();
-        
+
         const listDiv = document.getElementById('newsList');
-        
+
         if (data.length === 0) {
             listDiv.innerHTML = '<p style="text-align: center; color: #999;">등록된 항목이 없습니다.</p>';
             return;
         }
-        
+
+        // 카테고리 이름 매핑
+        const categoryNames = {
+            notice: '공지',
+            announcement: '공지',
+            event: '행사',
+            testimony: '간증',
+            mission: '선교'
+        };
+
         listDiv.innerHTML = data.map(item => `
             <div class="item-card">
                 ${item.image ? `<img src="/${item.image}" alt="${item.title}" onerror="this.style.display='none'">` : ''}
                 <h3>${item.title}</h3>
-                <p>${item.content}</p>
-                <div class="meta">${item.date || new Date(item.createdAt).toLocaleDateString('ko-KR')}</div>
+                <p>${item.excerpt || item.description || item.content || ''}</p>
+                ${item.category ? `<span class="meta">카테고리: ${categoryNames[item.category] || item.category}</span><br>` : ''}
+                ${item.date ? `<span class="meta">날짜: ${item.date}</span><br>` : ''}
+                ${item.group ? `<span class="meta">그룹: ${item.group === 'witness' ? 'Witness' : 'Fishermen'}</span><br>` : ''}
+                <div class="meta">${new Date(item.createdAt).toLocaleDateString('ko-KR')}</div>
                 <div class="item-actions">
                     <button class="btn-edit" onclick="editNews(${item.id})">수정</button>
                     <button class="btn-delete" onclick="deleteNews(${item.id})">삭제</button>

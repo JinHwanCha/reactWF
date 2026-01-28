@@ -1,32 +1,20 @@
+import { useState, useEffect } from 'react'
 import { useGroup } from '../context/GroupContext'
 
 function People() {
   const { group, config } = useGroup()
+  const [members, setMembers] = useState([])
 
-  // Witness team members
-  const witnessMembers = [
-    { name: '김지훈', role: '대학부 부장', bio: '대학부를 섬기며 학생들의 신앙 성장을 돕고 있습니다.' },
-    { name: '박서연', role: '예배 팀장', bio: '은혜로운 예배를 위해 찬양과 경배를 인도합니다.' },
-    { name: '이준영', role: '선교 팀장', bio: '캠퍼스 전도와 해외 선교를 담당하고 있습니다.' },
-    { name: '최민지', role: '양육 팀장', bio: '새신자 양육과 제자훈련을 섬기고 있습니다.' },
-    { name: '정수아', role: '미디어 팀장', bio: '영상과 SNS를 통해 복음을 전하고 있습니다.' },
-    { name: '강동혁', role: '행사 팀장', bio: '각종 행사와 수련회를 기획하고 진행합니다.' },
-    { name: '윤하은', role: '소그룹 팀장', bio: '소그룹 모임을 통해 교제와 나눔을 이끕니다.' },
-    { name: '한재민', role: '총무', bio: '대학부의 전반적인 행정과 재정을 담당합니다.' }
-  ]
-
-  // Fishermen team members
-  const fishermenMembers = [
-    { name: '이성민', role: '청년부 부장', bio: '청년부를 이끌며 하나님 나라를 세워가고 있습니다.' },
-    { name: '김예진', role: '예배 팀장', bio: '예배를 통해 하나님을 만나는 시간을 준비합니다.' },
-    { name: '박준혁', role: '선교 팀장', bio: '직장인 전도와 지역사회 섬김을 이끌고 있습니다.' },
-    { name: '정지원', role: '교육 팀장', bio: '청년들의 신앙 성장을 위한 교육을 담당합니다.' },
-    { name: '최현우', role: '소그룹 팀장', bio: '소그룹을 통한 친밀한 교제와 성장을 돕습니다.' },
-    { name: '송미라', role: '봉사 팀장', bio: '사회 봉사와 섬김의 사역을 담당하고 있습니다.' },
-    { name: '오태영', role: '총무', bio: '청년부의 행정과 재정을 관리하고 있습니다.' }
-  ]
-
-  const members = group === 'witness' ? witnessMembers : fishermenMembers
+  useEffect(() => {
+    // Load people data from API
+    fetch('/data/people.json')
+      .then(res => res.json())
+      .then(data => {
+        const filtered = data.filter(item => item.group === group)
+        setMembers(filtered)
+      })
+      .catch(err => console.error('Error loading people data:', err))
+  }, [group])
 
   return (
     <>
@@ -125,11 +113,19 @@ function People() {
             <h2>Leadership Team</h2>
           </div>
           <div className="team-grid">
-            {members.map((member, index) => (
-              <div key={index} className="team-member">
-                <div className="member-photo"></div>
+            {members.map((member) => (
+              <div key={member.id} className="team-member">
+                <div className="member-photo">
+                  {member.image && (
+                    <img
+                      src={`/${member.image}`}
+                      alt={member.name}
+                      onError={(e) => { e.target.style.display = 'none' }}
+                    />
+                  )}
+                </div>
                 <h3>{member.name}</h3>
-                <p className="member-role">{member.role}</p>
+                <p className="member-role">{member.position}</p>
                 <p className="member-bio">{member.bio}</p>
               </div>
             ))}
