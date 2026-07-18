@@ -8,9 +8,9 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 관리자 계정 정보
-define('ADMIN_USERNAME', 'fisherman');
-define('ADMIN_PASSWORD', 'ns7076351!');
+// 관리자 계정 정보 (환경 변수에서 로드)
+define('ADMIN_USERNAME', getenv('ADMIN_USERNAME') ?: '');
+define('ADMIN_PASSWORD', getenv('ADMIN_PASSWORD') ?: '');
 
 // 데이터 디렉토리
 define('DATA_DIR', __DIR__ . '/../data');

@@ -6,28 +6,31 @@ const ftp = require('basic-ftp');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
+// 환경 변수 로드 (.env.local 우선, 없으면 무시)
+try { require('dotenv').config({ path: '.env.local' }); } catch (e) { /* dotenv 미설치 시 무시 */ }
+
 const app = express();
 const PORT = 3001;
 
-// FTP 설정
+// FTP 설정 (환경 변수에서 로드)
 const FTP_CONFIG = {
-    host: '112.175.185.145',
-    user: 'fisherman',
-    password: 'ns7076351!',
+    host: process.env.FTP_HOST,
+    user: process.env.FTP_USER,
+    password: process.env.FTP_PASSWORD,
     secure: false
 };
 
-// 관리자 계정
+// 관리자 계정 (환경 변수에서 로드)
 const ADMIN_CREDENTIALS = {
-    username: 'fisherman',
-    password: 'ns7076351!'
+    username: process.env.ADMIN_USERNAME,
+    password: process.env.ADMIN_PASSWORD
 };
 
 // 미들웨어
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
-    secret: 'fisherman-secret-key-2026',
+    secret: process.env.SESSION_SECRET || 'change-me-session-secret',
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 24시간

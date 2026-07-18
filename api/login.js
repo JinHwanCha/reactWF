@@ -1,11 +1,15 @@
 import { createToken, setAuthCookie } from './_lib/auth.js'
 
-const USER = process.env.ADMIN_USERNAME || 'fisherman'
-const PASS = process.env.ADMIN_PASSWORD || 'ns7076351!'
+const USER = process.env.ADMIN_USERNAME
+const PASS = process.env.ADMIN_PASSWORD
 
 export default function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Invalid request method' })
+  }
+
+  if (!USER || !PASS) {
+    return res.status(500).json({ success: false, message: '서버에 관리자 계정이 설정되지 않았습니다. (환경 변수 확인)' })
   }
 
   let body = req.body

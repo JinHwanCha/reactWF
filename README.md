@@ -46,8 +46,8 @@ http://fisherman.dothome.co.kr/admin
 ```
 
 ## 로그인 정보
-- **아이디**: fisherman
-- **비밀번호**: ns7076351!
+- **아이디**: (환경 변수 ADMIN_USERNAME 참고)
+- **비밀번호**: (환경 변수 ADMIN_PASSWORD 참고)
 
 ## 기능
 

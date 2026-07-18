@@ -6,9 +6,9 @@
 https://filezilla-project.org/download.php?type=client
 
 ### 2. FTP 서버 접속
-- **호스트**: 112.175.185.145
-- **사용자명**: fisherman
-- **비밀번호**: ns7076351!
+- **호스트**: (FTP 호스트 주소)
+- **사용자명**: (FTP 사용자명 / 환경 변수 FTP_USER)
+- **비밀번호**: (FTP 비밀번호 / 환경 변수 FTP_PASSWORD)
 - **포트**: 21
 
 ### 3. 업로드할 파일/폴더
@@ -58,8 +58,8 @@ http://fisherman.dothome.co.kr/admin
 ```
 
 로그인:
-- 아이디: fisherman
-- 비밀번호: ns7076351!
+- 아이디: (관리자 아이디 / 환경 변수 ADMIN_USERNAME)
+- 비밀번호: (관리자 비밀번호 / 환경 변수 ADMIN_PASSWORD)
 
 ---
 
@@ -80,7 +80,7 @@ http://fisherman.dothome.co.kr/admin
 ## 📝 빠른 체크리스트
 
 - [ ] FileZilla 설치
-- [ ] FTP 서버 접속 (112.175.185.145)
+- [ ] FTP 서버 접속 (환경 변수 FTP_HOST 참고)
 - [ ] `admin/` 폴더 업로드
 - [ ] `api/` 폴더 업로드
 - [ ] `data/` 폴더 업로드 (빈 폴더라도 업로드)
