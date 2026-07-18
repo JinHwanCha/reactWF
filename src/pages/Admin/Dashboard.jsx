@@ -177,6 +177,22 @@ function AdminDashboard() {
     navigate('/admin')
   }
 
+  const handleReseed = async () => {
+    if (!window.confirm('현재 데이터를 기본 더미데이터로 되돌립니다. 계속하시겠습니까?')) return
+    try {
+      const res = await fetch('/api/seed', { method: 'POST' })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        flash('success', '시드 데이터가 복원되었습니다.')
+        loadItems(tab)
+      } else {
+        flash('error', data.error || '복원에 실패했습니다.')
+      }
+    } catch {
+      flash('error', '복원 중 오류가 발생했습니다.')
+    }
+  }
+
   const switchTab = (key) => {
     setTab(key)
     setEditing(null)
@@ -259,9 +275,12 @@ function AdminDashboard() {
         {/* 헤더 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
           <h1 style={{ fontSize: '28px', fontWeight: 700 }}>🐟 관리자 대시보드</h1>
-          <button onClick={handleLogout} style={{ ...ghostBtn, background: '#ff6b35', color: 'white' }}>
-            로그아웃
-          </button>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button onClick={handleReseed} style={ghostBtn}>더미데이터 복원</button>
+            <button onClick={handleLogout} style={{ ...ghostBtn, background: '#ff6b35', color: 'white' }}>
+              로그아웃
+            </button>
+          </div>
         </div>
 
         {/* 알림 */}

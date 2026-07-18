@@ -48,45 +48,52 @@ export async function handleResource(resource, req, res) {
     return res.status(401).json({ success: false, error: '인증이 필요합니다.' })
   }
 
-  const items = await getItems(resource)
+  try {
+    const items = await getItems(resource)
 
-  if (req.method === 'POST') {
-    const body = await readBody(req)
-    const newItem = {
-      id: `${Date.now()}${Math.floor(Math.random() * 1000)}`,
-      createdAt: new Date().toISOString()
+    if (req.method === 'POST') {
+      const body = await readBody(req)
+      const newItem = {
+        id: `${Date.now()}${Math.floor(Math.random() * 1000)}`,
+        createdAt: new Date().toISOString()
+      }
+      for (const f of fields) newItem[f] = body[f] ?? ''
+      items.unshift(newItem)
+      await setItems(resource, items)
+      return res.status(200).json({ success: true, data: newItem, message: '등록되었습니다.' })
     }
-    for (const f of fields) newItem[f] = body[f] ?? ''
-    items.unshift(newItem)
-    await setItems(resource, items)
-    return res.status(200).json({ success: true, data: newItem, message: '등록되었습니다.' })
-  }
 
-  if (req.method === 'PUT') {
-    const body = await readBody(req)
-    if (body.id == null) {
-      return res.status(400).json({ success: false, error: 'ID가 필요합니다.' })
+    if (req.method === 'PUT') {
+      const body = await readBody(req)
+      if (body.id == null) {
+        return res.status(400).json({ success: false, error: 'ID가 필요합니다.' })
+      }
+      const idx = items.findIndex((i) => String(i.id) === String(body.id))
+      if (idx === -1) {
+        return res.status(404).json({ success: false, error: '항목을 찾을 수 없습니다.' })
+      }
+      for (const f of fields) {
+        if (body[f] !== undefined) items[idx][f] = body[f]
+      }
+      items[idx].updatedAt = new Date().toISOString()
+      await setItems(resource, items)
+      return res.status(200).json({ success: true, data: items[idx], message: '수정되었습니다.' })
     }
-    const idx = items.findIndex((i) => String(i.id) === String(body.id))
-    if (idx === -1) {
-      return res.status(404).json({ success: false, error: '항목을 찾을 수 없습니다.' })
-    }
-    for (const f of fields) {
-      if (body[f] !== undefined) items[idx][f] = body[f]
-    }
-    items[idx].updatedAt = new Date().toISOString()
-    await setItems(resource, items)
-    return res.status(200).json({ success: true, data: items[idx], message: '수정되었습니다.' })
-  }
 
-  if (req.method === 'DELETE') {
-    const id = req.query?.id
-    if (id == null) {
-      return res.status(400).json({ success: false, error: 'ID가 필요합니다.' })
+    if (req.method === 'DELETE') {
+      const id = req.query?.id
+      if (id == null) {
+        return res.status(400).json({ success: false, error: 'ID가 필요합니다.' })
+      }
+      const next = items.filter((i) => String(i.id) !== String(id))
+      await setItems(resource, next)
+      return res.status(200).json({ success: true, message: '삭제되었습니다.' })
     }
-    const next = items.filter((i) => String(i.id) !== String(id))
-    await setItems(resource, next)
-    return res.status(200).json({ success: true, message: '삭제되었습니다.' })
+  } catch (err) {
+    if (err.code === 'KV_UNAVAILABLE') {
+      return res.status(503).json({ success: false, error: err.message })
+    }
+    return res.status(500).json({ success: false, error: '서버 오류가 발생했습니다.' })
   }
 
   res.setHeader('Allow', 'GET, POST, PUT, DELETE')
