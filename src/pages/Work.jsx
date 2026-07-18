@@ -18,7 +18,7 @@ function Work() {
 
   useEffect(() => {
     // Load work data
-    fetch('/data/work.json')
+    fetch('/api/work')
       .then(res => res.json())
       .then(data => {
         const filtered = data.filter(item => item.group === group)

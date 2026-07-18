@@ -7,7 +7,7 @@ function People() {
 
   useEffect(() => {
     // Load people data from API
-    fetch('/data/people.json')
+    fetch('/api/people')
       .then(res => res.json())
       .then(data => {
         const filtered = data.filter(item => item.group === group)

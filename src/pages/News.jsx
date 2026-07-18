@@ -19,7 +19,7 @@ function News() {
 
   useEffect(() => {
     // Load news data
-    fetch('/data/news.json')
+    fetch('/api/news')
       .then(res => res.json())
       .then(data => {
         const filtered = data.filter(item => item.group === group)

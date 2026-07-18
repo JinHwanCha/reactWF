@@ -10,7 +10,7 @@ function AdminLogin() {
 
   useEffect(() => {
     // Check if already logged in
-    fetch('/api/check-auth.php')
+    fetch('/api/check-auth')
       .then(res => res.json())
       .then(data => {
         if (data.isAuthenticated) {
@@ -26,7 +26,7 @@ function AdminLogin() {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/login.php', {
+      const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

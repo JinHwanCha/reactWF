@@ -42,7 +42,7 @@ function Home() {
 
   useEffect(() => {
     // Load recent work data
-    fetch('/data/work.json')
+    fetch('/api/work')
       .then(res => res.json())
       .then(data => {
         // Filter by current group and get latest 6 items
